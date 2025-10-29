@@ -1,0 +1,13 @@
+{
+  "name": "ci-cd-github-pages-example",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static site with ESLint quality gate and GitHub Pages deploy example.",
+  "scripts": {
+    "lint": "eslint src --ext .js",
+    "start": "echo \"Open src/index.html in your browser\""
+  },
+  "devDependencies": {
+    "eslint": "^8.46.0"
+  }
+}

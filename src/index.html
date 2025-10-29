@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ugliest UI — CI/CD Example</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Ugliest UI — Case Study</h1>
+
+    <section class="screenshot">
+      <h2>The screenshot (included)</h2>
+      <figure>
+        <img src="assets/ugliest-ui.png" alt="Screenshot of a deliberately bad UI" />
+        <figcaption>Provided screenshot showing a poor UI example.</figcaption>
+      </figure>
+
+      <h3>Why this UI is bad</h3>
+      <ul>
+        <li>Poor contrast and color choices that reduce readability.</li>
+        <li>Centered, non-hierarchical layout with no visual rhythm.</li>
+        <li>Confusing affordances (buttons and links that don't behave predictably).</li>
+        <li>Large hit targets that contrast awkwardly with surrounding text.</li>
+        <li>Poor accessibility: missing ARIA roles, keyboard traps, and low contrast text.</li>
+      </ul>
+
+      <h3>Proposed improvements</h3>
+      <ol>
+        <li>Establish a typographic scale and hierarchy (clear headings, paragraph sizes).</li>
+        <li>Improve color contrast and use a limited palette; test with contrast tools.</li>
+        <li>Use clear affordances: primary/secondary buttons, consistent link styles.</li>
+        <li>Make layout responsive and use spacing system for rhythm and balance.</li>
+        <li>Improve accessibility — semantic HTML, ARIA where needed, and keyboard navigation.</li>
+      </ol>
+    </section>
+
+    <section class="demo">
+      <h2>Interactive demo</h2>
+      <p>Click the button to see a message from <code>src/script.js</code> (this file intentionally contains a lint error).</p>
+      <button id="greet">Greet</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
