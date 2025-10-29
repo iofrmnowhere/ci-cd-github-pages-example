@@ -2,7 +2,16 @@ name: Lint and Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   lint:
@@ -23,8 +32,8 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
-  deploy:
-    name: Deploy to GitHub Pages
+  build:
+    name: Build static files
     needs: lint
     if: success()
     runs-on: ubuntu-latest
@@ -32,8 +41,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Prepare build
+        run: |
+          mkdir dist
+          cp -r src/* dist/
+
+      - name: Upload build artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./src
+          path: dist
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
