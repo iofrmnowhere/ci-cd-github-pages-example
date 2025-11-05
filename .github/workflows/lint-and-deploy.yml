@@ -72,8 +72,8 @@ jobs:
           mkdir dist
           cp -r src/* dist/
           # Copy index.html and script.js from root if necessary, adjust paths as needed
-          cp index.html dist/
-          cp script.js dist/
+          # cp index.html dist/
+          # cp script.js dist/
 
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3
