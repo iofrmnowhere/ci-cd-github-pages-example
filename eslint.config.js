@@ -3,10 +3,13 @@ import globals from "globals";
 import js from "@eslint/js";
 
 export default [
+  // 1. Place the configuration you want to extend (recommended rules) first in the array.
+  js.configs.recommended,
+
+  // 2. Then, place your custom configuration object.
   {
     files: ["**/*.js"],
     languageOptions: {
-      // Combines browser, jest, and ES module settings
       globals: {
         ...globals.browser,
         ...globals.jest,
@@ -14,10 +17,9 @@ export default [
       ecmaVersion: "latest",
       sourceType: "module",
     },
-    // Extends the standard recommended rules
-    extends: [js.configs.recommended],
+    // The "extends" keyword is GONE.
     rules: {
-      // 🚨 This enforces the semicolon rule (the original failure condition)
+      // 🚨 This rule enforces the semicolon (your intentional failure condition)
       semi: ["error", "always"],
       "no-unused-vars": "error",
       "no-undef": "error",

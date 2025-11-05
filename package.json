@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Static site with ESLint quality gate and GitHub Pages deploy example.",
+  "type": "module",
   "scripts": {
     "test": "jest",
     "lint": "eslint src/script.js",
