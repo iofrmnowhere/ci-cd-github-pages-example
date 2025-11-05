@@ -1,7 +1,3 @@
-// script.test.js
-// You might need to install babel-jest or use a simpler require
-// if your setup doesn't support "import" for tests immediately.
-// For most modern setups, this should work.
 import { getGreetingMessage } from "./script";
 
 // --- PASSING TEST --- (5 pts)
@@ -12,9 +8,9 @@ test("should return the correct greeting message (PASSING)", () => {
 
 // --- FAILING TEST (Demonstration) --- (5 pts)
 test("should fail because the message is incorrect (FAILING)", () => {
-  // This test will intentionally fail, demonstrating the Test gate blocks deployment.
+  // Intentional failure for CI/CD demo (change to real expected to pass)
   const incorrectMessage = "Hello — fix the lint error to deploy!";
-  expect(getGreetingMessage()).toBe(incorrectMessage); // 🚨 TEST FAILURE HERE
+  expect(getGreetingMessage()).toBe(incorrectMessage);
 });
 
 // Additional passing test
