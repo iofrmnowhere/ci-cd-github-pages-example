@@ -4,10 +4,16 @@
   "private": true,
   "description": "Static site with ESLint quality gate and GitHub Pages deploy example.",
   "scripts": {
-    "lint": "eslint src --ext .js",
-    "start": "echo \"Open src/index.html in your browser\""
+    "test": "jest",
+    "lint": "eslint script.js",
+    "start": "echo \"Open index.html in your browser\""
   },
   "devDependencies": {
-    "eslint": "^8.46.0"
+    "eslint": "^9.0.0",
+    "jest": "^29.7.0",
+    "globals": "^15.0.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
   }
 }

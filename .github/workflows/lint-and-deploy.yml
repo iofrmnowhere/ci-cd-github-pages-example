@@ -1,4 +1,4 @@
-name: Lint and Deploy
+name: Lint, Test, and Deploy
 
 on:
   push:
@@ -21,21 +21,47 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Use Node.js 18
+      - name: Use Node.js 20
+        # 💡 Recommended to use Node 20 for better compatibility with modern ESLint/Jest
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Install dependencies
         run: npm ci
 
       - name: Run ESLint
+        # This job will fail initially due to the missing semicolon
         run: npm run lint
+
+  test:
+    name: Test with Jest
+    # 🛑 The test job must wait for the lint job to pass
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        # Need to reinstall dependencies to ensure Jest is available
+        run: npm ci
+
+      - name: Run Jest Tests
+        # This job will fail initially due to the intentionally failing test
+        run: npm test
 
   build:
     name: Build static files
-    needs: lint
-    if: success()
+    # ✅ CRITICAL CHANGE: The build job now REQUIRES both lint AND test jobs to succeed.
+    needs: [lint, test]
+    # The 'if: success()' is now covered by 'needs' failure cascade,
+    # but keeping it doesn't hurt.
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -45,6 +71,9 @@ jobs:
         run: |
           mkdir dist
           cp -r src/* dist/
+          # Copy index.html and script.js from root if necessary, adjust paths as needed
+          cp index.html dist/
+          cp script.js dist/
 
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3
@@ -53,6 +82,7 @@ jobs:
 
   deploy:
     name: Deploy to GitHub Pages
+    # ⚠️ Deploy needs the build artifact to exist.
     needs: build
     environment:
       name: github-pages
