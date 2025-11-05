@@ -5,7 +5,7 @@
   "description": "Static site with ESLint quality gate and GitHub Pages deploy example.",
   "scripts": {
     "test": "jest",
-    "lint": "eslint script.js",
+    "lint": "eslint src/script.js",
     "start": "echo \"Open index.html in your browser\""
   },
   "devDependencies": {
