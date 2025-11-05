@@ -13,7 +13,7 @@ test("should return the correct greeting message (PASSING)", () => {
 // --- FAILING TEST (Demonstration) --- (5 pts)
 test("should fail because the message is incorrect (FAILING)", () => {
   // This test will intentionally fail, demonstrating the Test gate blocks deployment.
-  const incorrectMessage = "Goodbye — this message is wrong!";
+  const incorrectMessage = "Hello — fix the lint error to deploy!";
   expect(getGreetingMessage()).toBe(incorrectMessage); // 🚨 TEST FAILURE HERE
 });
 
