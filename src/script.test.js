@@ -9,7 +9,7 @@ test("should return the correct greeting message (PASSING)", () => {
 // --- FAILING TEST (Demonstration) --- (5 pts)
 test("should fail because the message is incorrect (FAILING)", () => {
   // Intentional failure for CI/CD demo (change to real expected to pass)
-  const incorrectMessage = "failing test";
+  const incorrectMessage = "Hello — fix the lint error to deploy!";
   expect(getGreetingMessage()).toBe(incorrectMessage);
 });
 
